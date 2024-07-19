@@ -27,7 +27,7 @@ jobs:
             sleep 5
             gh run watch -R  ${{ env.FULL_REPO }} $(gh run list -R  ${{ env.FULL_REPO }} -w  ${{ env.WORKFLOW }} -L1 --json databaseId --jq .[0].databaseId)
     env:
-      GH_TOKEN: ${{ secrets.REPO_PUBLIC  }}
+      GH_TOKEN: ${{ secrets.REPO_A_B_ADVANCE_READ  }}
       
       # - uses: actions/github-script@v6
       #   with:
