@@ -14,6 +14,13 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+env:
+  ORG: jpbnetley
+  REPO: ah-action-B
+  WORKFLOW: ah-b-workflow.yml
+  FULL_REPO: ${{ env.org }}/${{ env.repo }}
+
 jobs:
   # This workflow contains a single job called "build"
   build:
@@ -23,9 +30,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
         - run: |
-            gh workflow run ah-b-workflow.yml -R jpbnetley/ah-action-B
+            gh workflow run ${{ env.WORKFLOW }} -R ${{ env.FULL_REPO }}
             sleep 5
-            gh run watch -R jpbnetley/ah-action-B $(gh run list -R jpbnetley/ah-action-B -w  ah-b-workflow.yml -L1 --json databaseId --jq .[0].databaseId)
+            gh run watch -R  ${{ env.FULL_REPO }} $(gh run list -R  ${{ env.FULL_REPO }} -w  ${{ env.WORKFLOW }} -L1 --json databaseId --jq .[0].databaseId)
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
       
