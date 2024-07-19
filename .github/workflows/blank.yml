@@ -22,13 +22,20 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'jpbnetley',
-              repo: 'ah-action-B',
-              workflow_id: 'ah-b-workflow.yml',
-              ref: 'main'
-            })
+        - run: |
+            gh workflow run ah-b-workflow.yml -R jpbnetley/ah-action-B
+            sleep 5
+            gh run watch -R jpbnetley/ah-action-B $(gh run list -R jpbnetley/ah-action-B -w  ah-b-workflow.yml -L1 --json databaseId --jq .[0].databaseId)
+    env:
+      GH_TOKEN: ${{ secrets.MY_TOKEN }}
+      
+      # - uses: actions/github-script@v6
+      #   with:
+      #     github-token: ${{ secrets.PAT_TOKEN }}
+      #     script: |
+      #       await github.rest.actions.createWorkflowDispatch({
+      #         owner: 'jpbnetley',
+      #         repo: 'ah-action-B',
+      #         workflow_id: 'ah-b-workflow.yml',
+      #         ref: 'main'
+      #       })
