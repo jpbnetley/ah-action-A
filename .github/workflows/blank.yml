@@ -27,7 +27,7 @@ jobs:
             sleep 5
             gh run watch -R jpbnetley/ah-action-B $(gh run list -R jpbnetley/ah-action-B -w  ah-b-workflow.yml -L1 --json databaseId --jq .[0].databaseId)
     env:
-      GH_TOKEN: ${{ secrets.MY_TOKEN }}
+      GH_TOKEN: ${{ GITHUB_TOKEN  }}
       
       # - uses: actions/github-script@v6
       #   with:
