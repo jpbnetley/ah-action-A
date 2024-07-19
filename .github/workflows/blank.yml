@@ -18,9 +18,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - name: private repos
-          run: |
-            gh repo list jpbnetley --visibility private
         - name: setup compisit env
           run: |
             echo "FULL_REPO=${{env.ORG}}/${{env.REPO}}" >> $GITHUB_ENV
