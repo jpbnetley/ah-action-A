@@ -23,9 +23,9 @@ jobs:
             echo "FULL_REPO=${{env.ORG}}/${{env.REPO}}" >> $GITHUB_ENV
         - name: trigger remote    
           run: |
-            gh workflow run ${{ env.WORKFLOW }} -R ${{ env.REPO }}
+            gh workflow run ${{ env.WORKFLOW }} -R ${{ env.FULL_REPO }}
             sleep 5
-            gh run watch -R  ${{ env.REPO }} $(gh run list -R  ${{ env.REPO }} -w  ${{ env.WORKFLOW }} -L1 --json databaseId --jq .[0].databaseId)
+            gh run watch -R  ${{ env.FULL_REPO }} $(gh run list -R  ${{ env.FULL_REPO }} -w  ${{ env.WORKFLOW }} -L1 --json databaseId --jq .[0].databaseId)
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
       
