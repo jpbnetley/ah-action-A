@@ -19,7 +19,7 @@ env:
   ORG: jpbnetley
   REPO: ah-action-B
   WORKFLOW: ah-b-workflow.yml
-  FULL_REPO: ${{ env.org }}/${{ env.repo }}
+  FULL_REPO: ${{ env.ORG }}/${{ env.REPO }}
 
 jobs:
   # This workflow contains a single job called "build"
