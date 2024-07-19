@@ -19,7 +19,6 @@ env:
   ORG: jpbnetley
   REPO: ah-action-B
   WORKFLOW: ah-b-workflow.yml
-  FULL_REPO: ${{ env.ORG }}/${{ env.REPO }}
 
 jobs:
   # This workflow contains a single job called "build"
@@ -29,6 +28,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+        - name: setup compisit env
+          run: |
+            echo "FULL_REPO=${{env.ORG}}${{env.REPO}}" >> $GITHUB_ENV
         - run: |
             gh workflow run ${{ env.WORKFLOW }} -R ${{ env.FULL_REPO }}
             sleep 5
