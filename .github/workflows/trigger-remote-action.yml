@@ -5,9 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
   workflow_dispatch:
-
 
 env:
   ORG: jpbnetley
@@ -27,15 +25,6 @@ jobs:
             sleep 5
             gh run watch -R  ${{ env.FULL_REPO }} $(gh run list -R  ${{ env.FULL_REPO }} -w  ${{ env.WORKFLOW }} -L1 --json databaseId --jq .[0].databaseId)
     env:
+      # "PAT" (Personal access tokan). The PAT requires the "Full repo" access
       GH_TOKEN: ${{ secrets.PAT  }}
-      
-      # - uses: actions/github-script@v6
-      #   with:
-      #     github-token: ${{ secrets.PAT_TOKEN }}
-      #     script: |
-      #       await github.rest.actions.createWorkflowDispatch({
-      #         owner: 'jpbnetley',
-      #         repo: 'ah-action-B',
-      #         workflow_id: 'ah-b-workflow.yml',
-      #         ref: 'main'
-      #       })
+
