@@ -19,7 +19,7 @@ jobs:
         - name: Setup compisit env var
           run: |
             echo "FULL_REPO=${{env.ORG}}/${{env.REPO}}" >> $GITHUB_ENV
-        - name: trigger '{{ env.REPO }}' repo action
+        - name: trigger remote repo action
           run: |
             gh workflow run ${{ env.WORKFLOW }} -R ${{ env.FULL_REPO }}
             sleep 5
